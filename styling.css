@@ -6,6 +6,8 @@
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 100000;
+
 }
 
 /* Style the links inside the navigation bar */
@@ -17,6 +19,7 @@
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
+    text-decoration: none;
 }
 
 /* Change the color of links on hover */
@@ -24,53 +27,35 @@
     background-color: #ddd;
     color: black;
 }
-
-/* Hide the link that should open and close the topnav on small screens */
-/*.topnav .icon {
-    display: none;
-}
-
-iframe:focus {
-    outline: none;
-}
-
-iframe[seamless] {
-    display: block;
-}
-  */
-.active {
+a.active {
     background-color: #4CAF50;
     color: white;
-
-
+    hover-color: #4CAF50;
+}
+a.active:hover {
+    background-color: #4CAF50 ;
+    color:white;
 }
 .main {
   padding: 16px;
   margin-top: 30px;/* Add a top margin to avoid content overlay */
   height: 1500px; /* Used in this example to enable scrolling */
-  background-image: url("6.jpg");
   position: fixed;
 }
 
-body {
-
-        text-align:center;
-        background-size: cover
-        }
 .text  {
         color: Black;
         text-align:left;
         height: 100%;
         width: 100%;
         display: flex;
-        position: fixed;
+        position: absolute;
         align-items: center;
         justify-content: center;
-
         }
 p    {
         color: red
-        }
+     }
 img {
         display: block;
         max-width:230px;

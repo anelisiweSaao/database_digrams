@@ -1,36 +1,44 @@
 import os
+import shutil
 
-#add_css =''
-for filename in os.listdir(os.getcwd()+"/files"): # files in a directory
+# page files and titles
+pages = {
+    'Home': 'Home-page.html',
+    'Proposal': 'proposal.html',
+    'Block': 'Block_Layout.html',
+    'Salticam':'Salticam.html',
+    'SologEvent':'SologEvent_layout.html',
+    'Fault':'Fault.html ',
+    'Filedata':'filedata.html',
+    'OcsStep':'OcsStep.html',
+    'Hrs':'HRS.html',
+    'Bvit':'Bvit.html',
+    'Rss':'Rss.html'
 
+}
+titles = ['Home', 'Proposal', 'Block', 'Salticam', 'SologEvent', 'Fault', 'Filedata', 'OcsStep', 'Hrs', 'Bvit', 'Rss']
+files = ['Home-page.html'] + ['files/' + filename for filename in os.listdir(os.getcwd()+"/files")]
+
+for path in files: # files in a directory
+    filename = os.path.split(path)[1]
     if filename.endswith('.html'): #files that ends with .html extension
-
-        with open('files/' + filename, 'r') as file: #open files to read and write
-
-            with open('2' + filename, 'w')  as newFiles:  # create new files
-
+        with open(path, 'r') as file: #open files to read and write
+            current_page =filename
+            if not os.path.exists(os.getcwd() + '/output'):
+                os.makedirs('output')
+            with open('output/'+current_page ,'w')as newFiles:  # create new files
                 for line in file: #loop every line in a file
-                    #print(line)
                     if line == '<head>\n': # if line is head in html
-                        line +='<link rel = "stylesheet" type = "text/css" href = "styling.css" >\n' #add this line below the head
-
+                        line +='<link rel = "stylesheet" type = "text/css" href = "../styling.css" >\n' #add this line below the head
                     if line == '<body>\n':  # if line is body in html
-                        #print('its heeeeerreee', line)
-                        line += '<div class="topnav" id="myTopnav"> \n'\
-                                '<a href="Home-page.html">Home</a> \n'\
-                                '<a href="2Fault.html">fault</a> \n' \
-                                '<a href="2SologEvent_layout.html">SologEvent</a> \n' \
-                                '<a href="2Salticam.html">Salticam</a> \n' \
-                                '<a href="2Rss.html">Rss</a> \n' \
-                                '<a href="2proposal.html">proposal</a> \n' \
-                                '<a href="2OcsStep.html">OcsStep</a> \n' \
-                                '<a href="2ObsConfig_layout.html">ObsConfig</a> \n' \
-                                '<a href="2HRS.html">HRS</a> \n' \
-                                '<a href="2filedata.html">filedata</a> \n' \
-                                '<a href="2Bvit.html">Bvit</a> \n' \
-                                '<a href="2Block_Layout.html">Block</a> \n' \
-                                '</div>\n'
-
+                        line += '<div class="topnav" id="myTopnav"> \n'
+                        for title in titles:
+                            if pages[title] == current_page:
+                                className = 'active'
+                            else:
+                                className = ''
+                            line += '<a class="' + className + '" href="' + pages[title] + '">' + title + '</a>'
+                        line += '</div>\n'
                     newFiles.write(line)  # add this to new files created
 
 
